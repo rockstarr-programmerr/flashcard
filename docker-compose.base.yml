@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  fc_app:
+    build:
+      target: base
+    command: "node .docker/nodejs/dummy-server.js"

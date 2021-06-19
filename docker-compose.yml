@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  fc_app:
+    container_name: fc_app
+    build:
+      context: .
+      dockerfile: ./.docker/nodejs/Dockerfile
+      target: build
+    restart: always
+    env_file: ./.docker/nodejs/.env
+    volumes:
+      - ./:/flashcard
+    networks:
+      - flashcard_network
+    ports:
+      - 3000:3000
+
+  fc_db:
+    container_name: fc_db
+    build:
+      context: ./.docker/mysql
+    restart: always
+    env_file: ./.docker/mysql/.env
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - flashcard_volume
+    networks:
+      - flashcard_network
+    ports:
+      - 3333:3306
+
+volumes:
+  flashcard_volume:
+
+networks:
+  flashcard_network:
