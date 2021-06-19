@@ -8,20 +8,25 @@ services:
       dockerfile: ./.docker/nodejs/Dockerfile
       target: build
     restart: always
-    env_file: ./.docker/nodejs/.env
+    env_file:
+      - ./.docker/common.env
+      - ./.docker/nodejs/.env
     volumes:
       - ./:/flashcard
     networks:
       - flashcard_network
     ports:
       - 3000:3000
+    command: "npm run dev"
 
   fc_db:
     container_name: fc_db
     build:
       context: ./.docker/mysql
     restart: always
-    env_file: ./.docker/mysql/.env
+    env_file:
+      - ./.docker/common.env
+      - ./.docker/mysql/.env
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - flashcard_volume

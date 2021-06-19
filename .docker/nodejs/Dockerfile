@@ -11,4 +11,3 @@ FROM base AS build
 
 COPY package*.json ./
 RUN npm ci
-CMD [ "node", "src/app.js" ]
