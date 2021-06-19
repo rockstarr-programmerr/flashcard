@@ -1,17 +1,12 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const { sequelize } = require('./db/index.js')
+const { routes } = require('./routes')
 
-app.get('/', async (req, res) => {
-  try {
-    await sequelize.authenticate()
-    res.send('auth success')
-  } catch (error) {
-    res.send('auth failed')
-  }
-})
+app.use(express.json())
+
+routes(app)
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`App listening at port ${port}.`)
 })

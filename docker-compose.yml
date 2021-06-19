@@ -29,7 +29,7 @@ services:
       - ./.docker/mysql/.env
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - flashcard_volume
+      - flashcard_volume:/var/lib/mysql
     networks:
       - flashcard_network
     ports:
