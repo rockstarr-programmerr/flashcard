@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.CardDeck, {
         foreignKey: {
-          allowNull: false
+          allowNull: false,
+          name: 'cardDeckId'
         },
         onDelete: 'CASCADE'
       })

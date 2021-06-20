@@ -14,6 +14,7 @@ npm init
 .etc
 ```
 
+### When developing
 Next time, just spin up container with this command:
 ```
 docker-compose up -d --build
@@ -28,3 +29,14 @@ After finish, stop containers:
 ```
 docker-compose down
 ```
+
+### Database
+#### Migrate
+Exec into `fc_app` container: `docker exec -it fc_app sh`
+
+Run migrate command:
+```
+npx sequelize-cli db:migrate
+```
+
+[Detail document](https://sequelize.org/master/manual/migrations.html)

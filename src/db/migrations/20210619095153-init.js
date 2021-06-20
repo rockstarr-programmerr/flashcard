@@ -34,12 +34,18 @@ module.exports = {
             primaryKey: true,
             type: Sequelize.INTEGER
           },
-          name: {
-            type: Sequelize.STRING,
+          front: {
+            type: Sequelize.TEXT,
+            allowNull: false
+          },
+          back: {
+            type: Sequelize.TEXT,
             allowNull: false
           },
           cardDeckId: {
             type: Sequelize.INTEGER,
+            allowNull: false,
+            field: 'cardDeckId',
             references: {
               model: 'CardDecks',
               key: 'id',
@@ -61,8 +67,8 @@ module.exports = {
       ])
     })
   },
-  down: async (queryInterface, Sequelize) => {
-    queryInterface.sequelize.transaction(transaction => {
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.sequelize.transaction(transaction => {
       return Promise.all([
         queryInterface.dropTable('Cards', { transaction }),
         queryInterface.dropTable('CardDecks', { transaction })
